@@ -33,6 +33,7 @@ export default {
 }
 
 .carrinhoProduto {
-  height: 474px !important;
+  min-height: 468px !important;
+  max-height: 468px !important;
 }
 </style>

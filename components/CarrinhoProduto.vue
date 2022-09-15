@@ -63,6 +63,9 @@
         }}</span>
       </div>
     </div>
+    <div class="produtos-finalizar">
+      <span>finalizar compra </span>
+    </div>
   </section>
 </template>
 
@@ -122,12 +125,38 @@ export default {
 .produtos-adicionados {
   display: flex;
   flex-direction: column;
-
   margin-top: 21px;
   min-height: 216px;
   max-height: 216px;
   padding-left: 20px;
   padding-right: 20px;
+  overflow-y: scroll;
+}
+
+.produtos-adicionados::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
+
+.produtos-adicionados::-webkit-scrollbar {
+  width: 6px;
+  background-color: #f5f5f5;
+}
+
+.produtos-adicionados::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 10px;
+  background-image: -webkit-linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.2) 75%,
+    transparent 75%,
+    transparent
+  );
 }
 
 .jogo-img {
@@ -153,6 +182,22 @@ export default {
   align-items: center;
 }
 
+.produto:hover .produto-remover {
+  display: flex;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translate3d(-20px, 0px, 0px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0px, 0px, 0px);
+  }
+}
+
 .produto-detalhes {
   display: flex;
   flex-direction: column;
@@ -173,9 +218,15 @@ export default {
 }
 
 .produto-remover {
-  display: flex;
-  flex-direction: column;
+  display: none;
   justify-content: center;
+  min-width: 15px !important;
+  min-height: 15px !important;
+  max-height: 15px !important;
+  border-radius: 50%;
+  background-color: #54a3ff;
+  animation: fade 0.5s;
+  transition: 0.5s all;
 }
 
 .produto-remover-button {
@@ -186,10 +237,8 @@ export default {
   color: #ffffff;
   font-weight: bold;
   font-size: 12px;
-  width: 15px;
-  height: 15px;
-  background-color: #54a3ff;
-  border-radius: 50%;
+  width: 8px;
+  min-height: 17px !important;
 }
 
 .produtos-valores {
@@ -222,5 +271,31 @@ export default {
 
 .valor-final {
   font-size: 20px !important;
+}
+
+.produtos-finalizar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.produtos-finalizar span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-weight: bold;
+  width: 238px;
+  height: 50px;
+  background-color: #54a3ff;
+  border-radius: 3px;
+  transition: 0.5s all;
+  font-size: 14px;
+}
+
+.produtos-finalizar span:hover {
+  background-color: #54a4ff86;
 }
 </style>

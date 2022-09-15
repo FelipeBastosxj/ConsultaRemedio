@@ -35,12 +35,20 @@ export default {
       dados.value = await $axios.get('dados')
     }
 
-    const adicionarProduto = async (produto: object) => {
-      // eslint-disable-next-line no-console
-
-      await store.dispatch('produtos/adicionarProduto', {
-        produto,
+    const adicionarProduto = async (produto: Object) => {
+      const resultado = store.state.produtos.produtos.find((e) => {
+        return e.id === produto.id
       })
+
+      if (!resultado) {
+        await store.dispatch('produtos/adicionarProduto', {
+          produto,
+        })
+
+        return
+      }
+
+      alert('Produto ja adicionado')
     }
 
     onMounted(getDados)
