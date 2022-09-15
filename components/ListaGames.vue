@@ -7,29 +7,48 @@
       <p class="game-title">
         {{ dado.name }}
       </p>
-      <p class="game-value">R$ {{ dado.price }}</p>
-      <p class="game-add">adicionar ao carrinho</p>
+      <p class="game-value">
+        {{
+          dado.price.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          })
+        }}
+      </p>
+      <p class="game-add" @click="adicionarProduto(dado)">
+        adicionar ao carrinho
+      </p>
     </span>
   </section>
 </template>
 
 <script lang="ts">
-import { useContext, ref, onMounted } from '@nuxtjs/composition-api'
+import { useContext, ref, onMounted, useStore } from '@nuxtjs/composition-api'
 
 export default {
   setup() {
     const { $axios } = useContext()
     const dados = ref([])
+    const store = useStore()
 
-    const teste = async () => {
+    const getDados = async () => {
       dados.value = await $axios.get('dados')
     }
 
-    onMounted(teste)
+    const adicionarProduto = async (produto: object) => {
+      // eslint-disable-next-line no-console
+
+      await store.dispatch('produtos/adicionarProduto', {
+        produto,
+      })
+    }
+
+    onMounted(getDados)
 
     return {
-      teste,
+      getDados,
       dados,
+      adicionarProduto,
     }
   },
 }

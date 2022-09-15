@@ -1,34 +1,38 @@
 <template>
-  <section class="carrinho"></section>
+  <section
+    :class="{
+      carrinhoProduto: this.$store.state.produtos.produtos.length != 0,
+    }"
+    class="carrinho"
+  >
+    <carrinho-vazio v-if="this.$store.state.produtos.produtos.length == 0" />
+    <carrinho-produto v-else />
+  </section>
 </template>
 
 <script>
+import CarrinhoProduto from './CarrinhoProduto.vue'
+import CarrinhoVazio from './CarrinhoVazio.vue'
 export default {
-  data() {
-    return {
-      dados: [],
-    }
-  },
-  created() {
-    this.getData()
-  },
-
-  methods: {
-    async getData() {
-      // eslint-disable-next-line no-console
-      console.log('oi')
-    },
-  },
+  components: { CarrinhoProduto, CarrinhoVazio },
 }
 </script>
 
+ 
+
 <style scoped>
 .carrinho {
+  display: flex;
+  flex-direction: column;
   width: 262px;
   height: 325px;
   border: 1px solid #e1e1e1;
   margin-top: 8px;
   margin-left: 31px;
-  border-radius: 3px;
+  border-radius: 4px;
+}
+
+.carrinhoProduto {
+  height: 474px !important;
 }
 </style>
