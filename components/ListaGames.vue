@@ -35,8 +35,9 @@ export default {
       dados.value = await $axios.get('dados')
     }
 
-    const adicionarProduto = async (produto: Object) => {
-      const resultado = store.state.produtos.produtos.find((e) => {
+    const adicionarProduto = async (produto: { id: string }) => {
+      // @ts-ignore
+      const resultado = store.state.produtos.produtos.find((e: { id: any }) => {
         return e.id === produto.id
       })
 
