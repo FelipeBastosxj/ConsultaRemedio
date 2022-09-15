@@ -35,23 +35,32 @@
     <div class="produtos-valores">
       <div class="produtos-valores-tipos">
         <span class="label">subtotal</span>
-        <span class="valor">R$ 315,37</span>
+        <span class="valor">{{
+          subTotal.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          })
+        }}</span>
       </div>
       <div class="produtos-valores-tipos">
         <span class="label">frete</span>
-        <span v-if="total < 250" class="valor">R$ {{ frete }}</span>
-        <span v-else class="valor">R$ Gratis</span>
-      </div>
-      <div class="produtos-valores-tipos">
-        <span class="label">total</span>
-        <span class="valor valor-final">
+        <span class="valor">
           {{
-            total.toLocaleString('pt-BR', {
+            frete.toLocaleString('pt-BR', {
               style: 'currency',
               currency: 'BRL',
             })
           }}</span
         >
+      </div>
+      <div class="produtos-valores-tipos">
+        <span class="label">total</span>
+        <span class="valor valor-final">{{
+          total.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          })
+        }}</span>
       </div>
     </div>
   </section>
@@ -62,13 +71,17 @@ import { computed, useStore } from '@nuxtjs/composition-api'
 export default {
   setup() {
     const store = useStore()
-    const frete = computed(() => store.state.produtos.produtos.length * 10)
-    const total = computed(() =>
+
+    const frete = computed(() =>
+      subTotal.value < 250 ? store.state.produtos.produtos.length * 10 : 0.0
+    )
+    const subTotal = computed(() =>
       store.state.produtos.produtos.reduce(
         (total, numero) => total + numero.price,
         0
       )
     )
+    const total = computed(() => subTotal.value + frete.value)
 
     const removerProduto = async (id) => {
       const produtoEspecifico = store.state.produtos.produtos.indexOf(id)
@@ -81,6 +94,7 @@ export default {
     return {
       frete,
       total,
+      subTotal,
       removerProduto,
     }
   },
