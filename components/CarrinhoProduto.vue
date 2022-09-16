@@ -220,6 +220,7 @@ export default {
 .produto-remover {
   display: none;
   justify-content: center;
+  align-items: center;
   min-width: 15px !important;
   min-height: 15px !important;
   max-height: 15px !important;
@@ -277,7 +278,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 8px;
+
   cursor: pointer;
 }
 
