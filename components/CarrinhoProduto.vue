@@ -82,7 +82,7 @@ export default {
     const subTotal = computed(() =>
       // @ts-ignore
       store.state.produtos.produtos.reduce(
-        (total, numero) => total + numero.price,
+        (total: number, numero: { price: number }) => total + numero.price,
         0
       )
     )
