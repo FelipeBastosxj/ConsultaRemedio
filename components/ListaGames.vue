@@ -1,6 +1,11 @@
 <template>
   <section v-if="dados">
-    <span v-for="(dado, index) in dados.data" :key="index" class="manipulador">
+    <span
+      v-for="(dado, index) in dados.data"
+      v-show="loading"
+      :key="index"
+      class="manipulador"
+    >
       <div>
         <img :src="require(`~/assets/${dado.image}`)" alt="jogo" />
       </div>
@@ -19,6 +24,17 @@
         adicionar ao carrinho
       </p>
     </span>
+    <div v-show="!loading" class="loading-base">
+      <loading />
+      <loading />
+      <loading />
+      <loading />
+      <loading />
+      <loading />
+      <loading />
+      <loading />
+      <loading />
+    </div>
   </section>
 </template>
 
@@ -30,15 +46,18 @@ import {
   useStore,
   watch,
 } from '@nuxtjs/composition-api'
-
+import Loading from './Loading.vue'
 export default {
+  components: { Loading },
   setup() {
     const { $axios } = useContext()
     const dados = ref([])
     const store = useStore()
+    const loading = ref(false)
 
     const getDados = async () => {
       dados.value = await $axios.get('dados')
+      loading.value = true
     }
 
     const adicionarProduto = async (produto: { id: string }) => {
@@ -113,6 +132,7 @@ export default {
       getDados,
       dados,
       adicionarProduto,
+      loading,
     }
   },
 }
@@ -124,6 +144,13 @@ section {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 31px;
+}
+
+.loading-base {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 31px;
+  background-color: transparent;
 }
 
 section div {
@@ -198,11 +225,17 @@ p {
   section {
     grid-template-columns: 1fr 1fr !important;
   }
+  .loading-base {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media only screen and (max-width: 873px) {
   section {
     grid-template-columns: 1fr !important;
+  }
+  .loading-base {
+    grid-template-columns: 1fr;
   }
 }
 </style>
