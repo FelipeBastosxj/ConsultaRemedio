@@ -193,4 +193,16 @@ p {
     transform: translate3d(0px, 0px, 0px);
   }
 }
+
+@media only screen and (max-width: 1222px) {
+  section {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media only screen and (max-width: 873px) {
+  section {
+    grid-template-columns: 1fr !important;
+  }
+}
 </style>

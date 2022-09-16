@@ -40,4 +40,23 @@ main {
 .lateral {
   width: 70%;
 }
+
+@media only screen and (max-width: 873px) {
+  .lateral {
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 675px) {
+  main {
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0px;
+  }
+
+  .lateral {
+    width: 68%;
+  }
+}
 </style>

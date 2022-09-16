@@ -69,16 +69,18 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
 import { computed, useStore } from '@nuxtjs/composition-api'
 export default {
   setup() {
     const store = useStore()
 
     const frete = computed(() =>
+      // @ts-ignore
       subTotal.value < 250 ? store.state.produtos.produtos.length * 10 : 0.0
     )
     const subTotal = computed(() =>
+      // @ts-ignore
       store.state.produtos.produtos.reduce(
         (total, numero) => total + numero.price,
         0
@@ -86,10 +88,13 @@ export default {
     )
     const total = computed(() => subTotal.value + frete.value)
 
-    const removerProduto = async (id) => {
-      const produtoEspecifico = store.state.produtos.produtos.findIndex((e) => {
-        return e.id === id
-      })
+    const removerProduto = async (id: String) => {
+      // @ts-ignore
+      const produtoEspecifico = store.state.produtos.produtos.findIndex(
+        (e: { id: String }) => {
+          return e.id === id
+        }
+      )
 
       await store.dispatch('produtos/removerProduto', {
         index: produtoEspecifico,

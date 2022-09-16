@@ -57,4 +57,17 @@ export default {
   min-height: 474px !important;
   max-height: 474px !important;
 }
+
+@media only screen and (max-width: 873px) {
+  .carrinho {
+    margin-right: 18px;
+    position: fixed;
+  }
+}
+
+@media only screen and (max-width: 675px) {
+  .carrinho {
+    position: inherit !important;
+  }
+}
 </style>

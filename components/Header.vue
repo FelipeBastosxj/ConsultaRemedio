@@ -69,4 +69,16 @@ select option {
   border: none;
   cursor: pointer !important;
 }
+
+@media only screen and (max-width: 873px) {
+  .title {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 675px) {
+  header {
+    margin-top: 30px;
+  }
+}
 </style>
