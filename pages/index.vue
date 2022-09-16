@@ -5,7 +5,7 @@
       <lista-games />
     </section>
     <section>
-      <carrinho />
+      <carrinho-base />
     </section>
   </main>
 </template>
@@ -13,10 +13,10 @@
 <script lang="ts">
 import Cabecalho from '../components/Header.vue'
 import ListaGames from '../components/ListaGames.vue'
-import Carrinho from '../components/Carrinho.vue'
+import CarrinhoBase from '../components/CarrinhoBase.vue'
 export default {
-  components: { Cabecalho, ListaGames, Carrinho },
   name: 'IndexPage',
+  components: { Cabecalho, ListaGames, CarrinhoBase },
 }
 </script>
 
@@ -29,6 +29,7 @@ body {
 main {
   margin-top: 42px;
   margin-left: 70px;
+  margin-bottom: 105px;
   display: flex;
 }
 

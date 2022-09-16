@@ -23,7 +23,13 @@
 </template>
 
 <script lang="ts">
-import { useContext, ref, onMounted, useStore } from '@nuxtjs/composition-api'
+import {
+  useContext,
+  ref,
+  onMounted,
+  useStore,
+  watch,
+} from '@nuxtjs/composition-api'
 
 export default {
   setup() {
@@ -51,6 +57,45 @@ export default {
 
       alert('Produto ja adicionado')
     }
+
+    watch(
+      // @ts-ignore
+      () => store.state.produtos.filtro,
+      () => {
+        switch (store.state.produtos.filtro) {
+          case 'A-Z': {
+            dados.value.data.sort((a, b) => {
+              if (a.name < b.name) {
+                return -1
+              } else {
+                true
+              }
+            })
+            break
+          }
+          case 'Preço': {
+            dados.value.data.sort((a, b) => {
+              if (a.price > b.price) {
+                return -1
+              } else {
+                true
+              }
+            })
+            break
+          }
+          case 'Mais populares': {
+            dados.value.data.sort((a, b) => {
+              if (a.score > b.score) {
+                return -1
+              } else {
+                true
+              }
+            })
+            break
+          }
+        }
+      }
+    )
 
     onMounted(getDados)
 

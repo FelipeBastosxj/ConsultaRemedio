@@ -87,10 +87,12 @@ export default {
     const total = computed(() => subTotal.value + frete.value)
 
     const removerProduto = async (id) => {
-      const produtoEspecifico = store.state.produtos.produtos.indexOf(id)
+      const produtoEspecifico = store.state.produtos.produtos.findIndex((e) => {
+        return e.id === id
+      })
 
       await store.dispatch('produtos/removerProduto', {
-        produtoEspecifico,
+        index: produtoEspecifico,
       })
     }
 
