@@ -62,35 +62,45 @@ export default {
       // @ts-ignore
       () => store.state.produtos.filtro,
       () => {
+        // @ts-ignore
         switch (store.state.produtos.filtro) {
           case 'A-Z': {
-            dados.value.data.sort((a, b) => {
-              if (a.name < b.name) {
-                return -1
-              } else {
-                true
+            // @ts-ignore
+            dados.value.data.sort(
+              (a: { name: String }, b: { name: String }) => {
+                if (a.name < b.name) {
+                  return -1
+                } else {
+                  return true
+                }
               }
-            })
+            )
             break
           }
           case 'Preço': {
-            dados.value.data.sort((a, b) => {
-              if (a.price > b.price) {
-                return -1
-              } else {
-                true
+            // @ts-ignore
+            dados.value.data.sort(
+              (a: { price: Number }, b: { price: Number }) => {
+                if (a.price > b.price) {
+                  return -1
+                } else {
+                  return true
+                }
               }
-            })
+            )
             break
           }
           case 'Mais populares': {
-            dados.value.data.sort((a, b) => {
-              if (a.score > b.score) {
-                return -1
-              } else {
-                true
+            // @ts-ignore
+            dados.value.data.sort(
+              (a: { score: Number }, b: { score: Number }) => {
+                if (a.score > b.score) {
+                  return -1
+                } else {
+                  return true
+                }
               }
-            })
+            )
             break
           }
         }
